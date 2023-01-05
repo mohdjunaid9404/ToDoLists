@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import './style.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+  const [input, setInput] = useState("");
+  const [addItem, setAddItem] = useState([]);
+
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  };
+
+  const handleClick = () => {
+    setAddItem((oldItems)=>{
+      return [...oldItems, input];
+    });
+    setInput("");
+  };
+
+  const handleDelete = (id) => {
+    setAddItem((oldItems)=> {
+      return oldItems.filter((arrElement, index)=> {
+        return index !== id;
+      });
+    })
+  };
+
+  return(
+    <>
+    <div className="main_div">
+      <div className="center_div">
+          <h1>ToDo Lists</h1>
+          <input type="text" value={input} placeholder="Add a items" onChange={handleChange} />
+          <button onClick={handleClick}> + </button>
+          <ul>
+            {/* <li>{input}</li> */}
+            {addItem.map((items)=>{
+              return <li key={items.id}>               
+                <HighlightOffIcon className='icon' onClick={handleDelete} />
+                {items}</li>
+            })}
+          </ul>
+      </div>
     </div>
-  );
+    </>
+  )
 }
-
 export default App;
