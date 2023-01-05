@@ -32,14 +32,14 @@ const App = () => {
           <h1>ToDo Lists</h1>
           <input type="text" value={input} placeholder="Add a items" onChange={handleChange} />
           <button onClick={handleClick}> + </button>
-          <ul>
             {/* <li>{input}</li> */}
+          {/* <ol> */}
             {addItem.map((items)=>{
               return <li key={items.id}>               
                 <HighlightOffIcon className='icon' onClick={handleDelete} />
                 {items}</li>
             })}
-          </ul>
+          {/* </ol> */}
       </div>
     </div>
     </>
